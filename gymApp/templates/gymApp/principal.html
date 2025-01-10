@@ -1,6 +1,6 @@
 {% extends 'gymApp/base.html' %}
 
-{% block contenido %}
+{% block header %}
     <header>
         <h1>GymApp 2</h1>
 
@@ -10,5 +10,14 @@
             <a>Inicio</a>
         </div>
     </header>
+{% endblock %}
+
+{% block contenido %}
     <a href="{% url 'bloques' %}">Bloques</a>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        fsadfd
+    </footer>
 {% endblock %}
