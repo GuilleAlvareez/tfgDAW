@@ -53,6 +53,51 @@ body {
     cursor: pointer;
 }
 
+
+.header-noprincipal {
+    background-color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 3.5rem;
+    border-bottom: #27272a 1px solid;
+}
+
+.header-noprincipal div {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-noprincipal div a {
+    text-decoration: none;
+    padding: 1rem;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 100ms linear;
+}
+
+.header-noprincipal div a:hover {
+    background: #5c5b5b;
+}
+
+.header-noprincipal li {
+    list-style-type: none;
+}
+
+.header-noprincipal a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.main-noprincipal {
+    background-color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #main-principal {
     background: linear-gradient(to top, var(--color-primario), var(--gris-clarito));
     display: flex;

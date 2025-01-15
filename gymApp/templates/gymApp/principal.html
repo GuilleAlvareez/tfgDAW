@@ -2,13 +2,14 @@
 
 {% block header %}
     <header id="header-principal">
-        <h1>GymTracker</h1>
+        <a href="{% url 'principal' %}">
+            <h1>GymTracker</h1>
+        </a>
 
         <div>
             <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
-            <a>Inicio</a>
             
             {% if user.is_authenticated %}
                 <p>¡Bienvenido, {{ user.username }}!</p>

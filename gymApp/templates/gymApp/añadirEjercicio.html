@@ -1,13 +1,15 @@
 {% extends 'gymApp/base.html' %}
 
 {% block header %}
-    <header id="header-principal">
-        <h1>GymTracker</h1>
-
+    <header class="header-noprincipal">
+        <a href="{% url 'principal' %}">
+            <h1>GymTracker</h1>
+        </a>
+        
         <div>
+            <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
-            <a>Inicio</a>
             
             {% if user.is_authenticated %}
                 <p>¡Bienvenido, {{ user.username }}!</p>
@@ -24,12 +26,26 @@
 {% endblock %}
 
 {% block contenido %}
-    <main>
-        <form action="" method="post">
+<main id="main-añadirEjercicio">
+    <article id="article-añadirEjercicio">
+        <h1>Añadir un nuevo Ejercicio</h1>
+        <p>Crea un ejercicio personalizado para tu rutina</p>
+
+        <form action="" method="post" id="form-ejercicio">
             {% csrf_token %} 
-            {{ form.as_p }}
+            <label for="nombre">Nombre del ejercicio</label>
+            {{form.nombre}}
+            <label for="musculos">Musculos trabajados</label>
+            {{form.musculos}}
+            <label for="visibilidad">Visibilidad</label>
+            {{form.visibilidad}}
             <button type="submit" class="">Agregar</button>
         </form>
+
+        {% if existeEjercicio %}
+            <p>El ejercicio ya existe</p>
+        {% endif %}
+    </article>
 
         <ul>
             {% for ejercicio in ejercicios %}

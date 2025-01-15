@@ -7,9 +7,9 @@
         </a>
 
         <div>
+            <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
-            <a href="{% url 'principal' %}">Inicio</a>
             
             {% if user.is_authenticated %}
                 <p>¡Bienvenido, {{ user.username }}!</p>
@@ -35,7 +35,11 @@
             
             <form method="post" class="formulario-login">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <label>Usuario</label>
+                {{form.username}}
+
+                <label>Contraseña</label>
+                {{form.password}}
                 <button type="submit">Iniciar sesión</button>
             </form>
         </article>

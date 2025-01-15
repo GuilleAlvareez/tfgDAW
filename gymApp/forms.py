@@ -6,7 +6,7 @@ class RegistrarEntrenamiento(forms.ModelForm):
         model = Entreno
         fields = ['fecha', 'valoracion', 'comentarios']
 
-class AñadirEjercicio(forms.ModelForm):
+class AñadirEjercicioPersonalizado(forms.ModelForm):
     class Meta:
         model = Ejercicio
         fields = '__all__'

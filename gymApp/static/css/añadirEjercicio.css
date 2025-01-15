@@ -1,47 +1,45 @@
 :root {
     --color-primario: #09090b;
     --gris-clarito: #39393b;
-    --bordes: #27272a;
 }
 
+#main-añadirEjercicio {
+    padding: 1rem;    
+    gap: 1rem;
+}
 
-.card-login {
-    min-width: 30%;
-    min-height: 57%;
+#article-añadirEjercicio {
     border: var(--bordes) 1px solid;
     padding: 1.5rem;
-    gap: 1rem;
     border-radius: 10px;
 }
 
-.card-login div {
-    margin-bottom: 2rem;
-}
-
-.card-login div h1 {
+#article-añadirEjercicio h1 {
     font-size: 2rem;
 }
 
-.card-login div p {
+#article-añadirEjercicio p {
     color: #9797a0;
+    margin-bottom: 2rem;
 }
 
-.formulario-login {
+#form-ejercicio {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: column; 
+    gap: .75rem;
 }
 
-.formulario-login input {
+#form-ejercicio input {
     width: 100%;
     padding: .6rem;
     color: white;
     background-color: transparent;
     border: var(--bordes) 1px solid;
     border-radius: 7px;
+    margin-bottom: 5px;
 }
 
-.formulario-login button {
+#form-ejercicio button {
     background-color: white;
     width: 100%;
     padding: .6rem;
@@ -53,6 +51,6 @@
     cursor: pointer;
 }
 
-.formulario-login button:hover {
+#form-ejercicio button:hover {
     background: #e1e1e1;
 }
