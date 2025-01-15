@@ -1,3 +1,8 @@
+:root {
+    --color-primario: #09090b;
+    --gris-clarito: #39393b;
+}
+
 * {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -9,23 +14,23 @@ body {
     color: white;
     display: grid;
     height: 100vh;
-    grid-template-rows: 9vh 100% 1fr;
+    grid-template-rows: 9vh 91% 1fr;
 }
 
-header {
-    background-color: #373737;
+#header-principal {
+    background-color: var(--color-primario);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0px 3.5rem;
 }
 
-header div {
+#header-principal div {
     display: flex;
     gap: 1rem;
 }
 
-header div a {
+#header-principal div a {
     text-decoration: none;
     padding: 1rem;
     font-size: larger;
@@ -34,25 +39,40 @@ header div a {
     transition: all 100ms linear;
 }
 
-header div a:hover {
+#header-principal div a:hover {
     background: #5c5b5b;
 }
 
-li {
+#header-principal li {
     list-style-type: none;
 }
 
-a {
+#header-principal a {
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.seccion-bloques {
-    width: 100%;
+#main-principal {
+    background: linear-gradient(to top, var(--color-primario), var(--gris-clarito));
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    padding: 0px 3.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo-principal {
+    font-size: 3rem;
+}
+
+#parrafo-principal {
+    width: 30%;
+    font-size: medium;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-align: center;
+    line-clamp: 2;
+    overflow: hidden;
 }
 
 footer {

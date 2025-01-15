@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Bloque, Semana, Dia, Ejercicio
+from .models import Entreno, Musculo, Ejercicio, Ejercicio_realizado
 
 # Register your models here.
-admin.site.register(Bloque)
-admin.site.register(Semana)
-admin.site.register(Dia)
+admin.site.register(Entreno)
+admin.site.register(Ejercicio_realizado)
+admin.site.register(Musculo)
 admin.site.register(Ejercicio)

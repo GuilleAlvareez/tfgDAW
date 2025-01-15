@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Musculo(models.Model):
@@ -25,9 +25,10 @@ class Ejercicio(models.Model):
         return f"{self.nombre}"
 
 class Entreno(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
     valoracion = models.IntegerField()
-    ejercicios = models.IntegerField()
+    ejercicios = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
     comentarios = models.CharField(max_length=300)
 
     class Meta:

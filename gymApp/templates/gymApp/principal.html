@@ -1,19 +1,43 @@
 {% extends 'gymApp/base.html' %}
 
 {% block header %}
-    <header>
-        <h1>GymApp 2</h1>
+    <header id="header-principal">
+        <h1>GymTracker</h1>
 
         <div>
-            <a href="{% url 'bloques' %}">Bloques</a>
+            <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
+            <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
             <a>Inicio</a>
+            
+            {% if user.is_authenticated %}
+                <p>¡Bienvenido, {{ user.username }}!</p>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %} 
+                    <button type="submit" class="">Cerrar Sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
         </div>
+
     </header>
 {% endblock %}
 
 {% block contenido %}
-    <a href="{% url 'bloques' %}">Bloques</a>
+    <main id="main-principal">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="80" height="80" stroke-width="1">
+            <path d="M2 12h1"></path>
+            <path d="M6 8h-2a1 1 0 0 0 -1 1v6a1 1 0 0 0 1 1h2"></path>
+            <path d="M6 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z"></path>
+            <path d="M9 12h6"></path>
+            <path d="M15 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z"></path>
+            <path d="M18 8h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2"></path>
+            <path d="M22 12h-1"></path>
+        </svg>
+        <h1 id="titulo-principal">Bienvenido a GymTracker</h1>
+        <p id="parrafo-principal">Registra tus entrenamientos, sigue tu proceso, y alcanza tus metas en el gimnasio</p>
+    </main>
 {% endblock %}
 
 {% block footer %}

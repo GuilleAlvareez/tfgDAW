@@ -1,0 +1,34 @@
+{% extends 'gymApp/base.html' %}
+
+{% block header %}
+    <header id="header-principal">
+        <h1>GymTracker</h1>
+
+        <div>
+            <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
+            <a>Perfil</a>
+            <a>Inicio</a>
+            
+            {% if user.is_authenticated %}
+                <p>¡Bienvenido, {{ user.username }}!</p>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %} 
+                    <button type="submit" class="">Cerrar Sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
+        </div>
+
+    </header>
+{% endblock %}
+
+{% block contenido %}
+    <main>
+        <form action="" method="post">
+            {% csrf_token %} 
+            {{ form.as_p }}
+            <button type="submit" class="">Agregar</button>
+        </form>
+    </main>
+{% endblock %}

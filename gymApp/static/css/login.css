@@ -1,0 +1,53 @@
+:root {
+    --color-primario: #09090b;
+    --gris-clarito: #39393b;
+}
+
+.header-noprincipal {
+    background-color: var(--color-primario);
+    background-color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 3.5rem;
+    border-bottom: #c5c5c5 1px solid;
+}
+
+.header-noprincipal div {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-noprincipal div a {
+    text-decoration: none;
+    padding: 1rem;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 100ms linear;
+}
+
+.header-noprincipal div a:hover {
+    background: #5c5b5b;
+}
+
+.header-noprincipal li {
+    list-style-type: none;
+}
+
+.header-noprincipal a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.main-noprincipal {
+    background-color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-login {
+    
+}
