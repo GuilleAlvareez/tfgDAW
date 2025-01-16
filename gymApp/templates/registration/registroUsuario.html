@@ -29,18 +29,23 @@
     <main class="main-noprincipal">
         <article class="card-login">
             <div>
-                <h1>Iniciar sesión</h1>
-                <p>Ingresa tus datos para acceder a tu cuenta</p>
+                <h1>Registro</h1>
+                <p>Ingresa tus datos para crear tu cuenta</p>
             </div>
             
             <form method="post" class="formulario-login">
                 {% csrf_token %}
+                
                 <label>Usuario</label>
                 {{ form.username }}
 
                 <label>Contraseña</label>
-                {{ form.password }}
-                <button type="submit">Iniciar sesión</button>
+                {{ form.password1 }}
+
+                <label>Confirma la contraseña</label>
+                {{ form.password2 }}
+
+                <button type="submit">Registrarse</button>
             </form>
         </article>
     </main>

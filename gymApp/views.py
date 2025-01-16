@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio
@@ -8,6 +9,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 def principal(request):
     return render(request, 'gymApp/principal.html')
+
+class RegistroUsuario(CreateView):
+    template_name = 'registration/registroUsuario.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('principal')
 
 class RegistrarEntreno(CreateView):
     template_name = 'gymApp/registrarEntreno.html'

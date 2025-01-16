@@ -1,14 +1,18 @@
 :root {
     --color-primario: #09090b;
     --gris-clarito: #39393b;
+    --azul-sombra: #1f89b0;
 }
 
 #main-añadirEjercicio {
-    padding: 1rem;    
-    gap: 1rem;
+    display: flex;
+    align-items: flex-start;
+    padding: 2rem 3.5rem 0 3.5rem;    
+    gap: 2rem;
 }
 
 #article-añadirEjercicio {
+    min-width: 25%;
     border: var(--bordes) 1px solid;
     padding: 1.5rem;
     border-radius: 10px;
@@ -39,6 +43,29 @@
     margin-bottom: 5px;
 }
 
+#form-ejercicio select {
+    width: 100%;
+    padding: .6rem;
+    color: white;
+    background-color: transparent;
+    border: var(--bordes) 1px solid;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+#form-ejercicio select:focus {
+    outline: none;
+    border-color: #e1e1e1;
+}
+
+#form-ejercicio option {
+    background-color: var(--color-primario);
+    color: white;
+    padding: .5rem;
+    font-size: medium;
+}
+
 #form-ejercicio button {
     background-color: white;
     width: 100%;
@@ -53,4 +80,46 @@
 
 #form-ejercicio button:hover {
     background: #e1e1e1;
+}
+
+.ejercicios {
+    width: 100%;
+    margin-right: 2rem;
+}
+
+.ejercicios div{
+    margin-bottom: 1rem;
+}
+
+.ejercicios div h1{
+    text-align: center;
+}
+
+.ejercicios ul li {
+    list-style: none;
+    font-size: 1.3rem;
+}
+
+.card-ejercicio {
+    border: var(--bordes) 1px solid;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    transition: all 200ms linear;
+}
+
+.card-ejercicio:hover {
+    box-shadow: 0px 5px 8px var(--azul-sombra);
+    transform: translateY(-5px);
+}
+
+@media (max-width: 600px) {
+    #main-añadirEjercicio {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #article-añadirEjercicio {
+        min-width: 100%;
+    }
 }

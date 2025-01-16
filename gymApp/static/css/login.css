@@ -7,7 +7,7 @@
 
 .card-login {
     min-width: 30%;
-    min-height: 57%;
+    min-height: auto;
     border: var(--bordes) 1px solid;
     padding: 1.5rem;
     gap: 1rem;
