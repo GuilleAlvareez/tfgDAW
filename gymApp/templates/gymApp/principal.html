@@ -9,10 +9,9 @@
         <div>
             <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
-            <a>Perfil</a>
             
             {% if user.is_authenticated %}
-                <p>¡Bienvenido, {{ user.username }}!</p>
+                <a>Perfil</a>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %} 
                     <button type="submit" class="">Cerrar Sesión</button>

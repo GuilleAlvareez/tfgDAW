@@ -4,6 +4,10 @@
     --azul-sombra: #1f89b0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 #main-añadirEjercicio {
     display: flex;
     align-items: flex-start;
@@ -98,6 +102,10 @@
 .ejercicios ul li {
     list-style: none;
     font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card-ejercicio {
@@ -111,6 +119,26 @@
 .card-ejercicio:hover {
     box-shadow: 0px 5px 8px var(--azul-sombra);
     transform: translateY(-5px);
+}
+
+#boton-svg {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: .25rem;
+    transition: all 200ms linear;
+    border-radius: 4px;
+}
+
+#boton-svg:hover {
+    background-color: rgb(255, 193, 193);
+}
+
+#boton-svg:hover svg {
+    stroke: rgb(255, 33, 33);
 }
 
 @media (max-width: 600px) {
