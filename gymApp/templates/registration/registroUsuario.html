@@ -7,7 +7,7 @@
         </a>
 
         <div>
-            <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
+            <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
             
@@ -47,6 +47,7 @@
 
                 <button type="submit">Registrarse</button>
             </form>
+            <p id="registrarse"><a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia Sesion</a></p>
         </article>
     </main>
 {% endblock %}
