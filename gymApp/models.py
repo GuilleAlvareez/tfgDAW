@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ValidationError
 # Create your models here.
 
 class Musculo(models.Model):
@@ -23,6 +24,11 @@ class Ejercicio(models.Model):
 
     def __str__(self):
         return f"{self.nombre}"
+    
+    def clean(self):
+        if Ejercicio.objects.filter(nombre=self.nombre).exists():
+            raise ValidationError('El ejercicio ya existe')
+        return super().clean()
 
 class Entreno(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)

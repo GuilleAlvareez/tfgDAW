@@ -19,32 +19,15 @@ class RegistrarEntreno(CreateView):
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
 
-class AñadirEjercicio(LoginRequiredMixin, View):
+class AñadirEjercicio(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/añadirEjercicio.html'
+    form_class = AñadirEjercicioPersonalizado
+    context_object_name = 'ejercicios'
+    success_url = reverse_lazy('añadirEjercicio')
+    
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
 
-    def get(self, request):
-        form = AñadirEjercicioPersonalizado()
-        ejercicios = Ejercicio.objects.all()
-        return render(request, self.template_name, {'form': form, 'ejercicios': ejercicios})
+        contexto['ejercicios'] = Ejercicio.objects.filter(visibilidad='all')
 
-    def post(self, request):
-        accion = request.POST['accion']
-        existeEjercicio = False
-        form = AñadirEjercicioPersonalizado(request.POST)
-
-        if accion == 'crear' and form.is_valid():
-            existeEjercicio = Ejercicio.objects.filter(nombre=form.cleaned_data['nombre']).exists()
-
-            if not existeEjercicio:
-                form.save()
-                return redirect('añadirEjercicio')
-            
-        elif accion == 'eliminar':
-            ejercicio_id = request.POST['ejercicio_id']
-
-            if ejercicio_id:
-                Ejercicio.objects.filter(id=ejercicio_id).delete()
-                return redirect('añadirEjercicio')
-
-        ejercicios = Ejercicio.objects.all()
-        return render(request, self.template_name, {'form': form, 'ejercicios': ejercicios, 'existeEjercicio': existeEjercicio})
+        return contexto
