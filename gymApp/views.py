@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio
-from .forms import RegistrarEntrenamiento, AñadirEjercicioPersonalizado
+from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado
 from django.views.generic import CreateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -19,11 +19,11 @@ class RegistrarEntreno(CreateView):
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
 
-class AñadirEjercicio(LoginRequiredMixin, CreateView):
-    template_name = 'gymApp/añadirEjercicio.html'
-    form_class = AñadirEjercicioPersonalizado
+class AnadirEjercicio(LoginRequiredMixin, CreateView):
+    template_name = 'gymApp/anadirEjercicio.html'
+    form_class = AnadirEjercicioPersonalizado
     context_object_name = 'ejercicios'
-    success_url = reverse_lazy('añadirEjercicio')
+    success_url = reverse_lazy('anadirEjercicio')
     
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
