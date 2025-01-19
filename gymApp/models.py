@@ -35,8 +35,8 @@ class Entreno(models.Model):
     fecha = models.DateField()
     valoracion = models.IntegerField()
     ejercicios = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
-    comentarios = models.CharField(max_length=300)
-
+    comentarios = models.CharField(max_length=300, blank=True)
+    
     class Meta:
         verbose_name = 'Entreno'
         verbose_name_plural = 'Entrenos'

@@ -71,10 +71,25 @@ html {
     font-size: medium;
 }
 
+#form-ejercicio select::-webkit-scrollbar {
+    width: 7px;
+}
+
+#form-ejercicio select::-webkit-scrollbar-track {
+    background-color: var(--gris-clarito);
+}
+
+#form-ejercicio select::-webkit-scrollbar-thumb {
+    background-color: #69696d;
+    border-radius: 10px;
+}
+
+
 #form-ejercicio button {
     background-color: white;
     width: 100%;
     padding: .6rem;
+    border: none;
     border-radius: 7px;
     color: black;
     font-size: medium;

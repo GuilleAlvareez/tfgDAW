@@ -1,38 +1,27 @@
 :root {
     --color-primario: #09090b;
     --gris-clarito: #39393b;
-    --bordes: #27272a;
+    --azul-sombra: #1f89b0;
 }
 
+#main-entreno {
+    padding: 1rem;
+}
 
-.card-login {
-    min-width: 30%;
-    min-height: auto;
+#registro-entreno {
+    min-width: 25%;
     border: var(--bordes) 1px solid;
     padding: 1.5rem;
-    gap: 1rem;
     border-radius: 10px;
 }
 
-.card-login div {
-    margin-bottom: 2rem;
-}
-
-.card-login div h1 {
-    font-size: 2rem;
-}
-
-.card-login div p {
-    color: #9797a0;
-}
-
-.formulario-login {
+#form-entreno {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .75rem;
 }
 
-.formulario-login input {
+#form-entreno input {
     width: 100%;
     padding: .6rem;
     color: white;
@@ -41,7 +30,18 @@
     border-radius: 7px;
 }
 
-.formulario-login button {
+#form-entreno input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+#form-entreno textarea {
+    height: 6rem;
+    background: var(--color-primario);
+    color: white;
+    border-radius: 7px;
+}
+
+#form-entreno button {
     background-color: white;
     width: 100%;
     padding: .6rem;
@@ -55,21 +55,12 @@
     margin-bottom: 1rem;
 }
 
-.formulario-login button:hover {
+#form-entreno button:hover {
     background: #e1e1e1;
 }
 
-.card-login #registrarse {
-    text-align: center;
-}
-
-.card-login a {
-    text-decoration: none;
-}
-
-.card-login a:hover {
-    text-decoration: underline;
-}
-.card-login a:visited {
-    color: #9797a0;
+@media (max-width: 600px) {
+    #form-entreno input[type="date"] {
+        padding-right: 0;
+    }
 }

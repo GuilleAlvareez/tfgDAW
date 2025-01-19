@@ -1,13 +1,13 @@
 {% extends 'gymApp/base.html' %}
 
 {% block header %}
-    <header id="header-principal">
+    <header class="header-noprincipal">
         <a href="{% url 'principal' %}">
             <h1>GymTracker</h1>
         </a>
 
         <div>
-            <a href="{% url 'añadirEjercicio' %}">Ejercicios</a>
+            <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             <a>Perfil</a>
             
@@ -26,11 +26,25 @@
 {% endblock %}
 
 {% block contenido %}
-    <main>
-        <form action="" method="post">
-            {% csrf_token %} 
-            {{ form.as_p }}
-            <button type="submit" class="">Agregar</button>
-        </form>
+    <main id="main-entreno">
+        <section id="registro-entreno">
+            <form action="" method="post" id="form-entreno">
+                {% csrf_token %} 
+                <input hidden name="usuario" value="{{ user.id }}">
+                <label>Fecha del entreno</label>
+                {{ form.fecha }}
+
+                <label>Valoracion</label>
+                {{ form.valoracion }}
+
+                <label>Ejercicio</label>
+                {{ form.ejercicios }}
+
+                <label>Comentarios</label>
+                {{ form.comentarios }}
+
+                <button type="submit" class="">Agregar</button>
+            </form>
+        </section>
     </main>
 {% endblock %}
