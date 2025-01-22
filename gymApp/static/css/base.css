@@ -17,6 +17,16 @@ body {
     grid-template-rows: 9vh 91% 1fr;
 }
 
+body::-webkit-scrollbar {
+    background-color: var(--gris-clarito);
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--color-primario);
+    border-radius: 10px;
+}
+
 #header-principal {
     background-color: var(--color-primario);
     display: flex;

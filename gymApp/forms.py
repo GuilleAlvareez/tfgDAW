@@ -1,10 +1,19 @@
 from django import forms
-from .models import Entreno, Ejercicio
+from django.forms import formset_factory
+from .models import Entreno, Ejercicio, Ejercicio_realizado
+
+class anadirEjercicioRealizado(forms.ModelForm):
+    class Meta: 
+        model = Ejercicio_realizado
+        fields = '__all__'
+
+EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado)
+
 
 class RegistrarEntrenamiento(forms.ModelForm):
     class Meta:
         model = Entreno
-        fields = ['fecha', 'ejercicios', 'valoracion', 'comentarios']
+        fields = ['fecha', 'valoracion', 'comentarios']
         widgets = {
             'fecha': forms.DateInput(attrs={
                 'type': 'date'

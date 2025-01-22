@@ -14,6 +14,8 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,6 +84,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mysql.connector.django',  # Motor para mysql-connector-python
+#         'NAME': config('DB_NAME'),  # Nombre de la base de datos
+#         'USER': config('DB_USER'),                # Usuario de la base de datos
+#         'PASSWORD': config('DB_PASSWORD'),       # Contraseña del usuario
+#         'HOST': config('DB_HOST', default='localhost'),               # Dirección del servidor
+#         'PORT': config('DB_PORT', default='3306'),                    # Puerto de la base de datos
+#         'OPTIONS': {
+#             'autocommit': True,
+#         },
+#     }
+# }
 
 
 # Password validation

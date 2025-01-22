@@ -3,8 +3,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio
 from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado
-from django.views.generic import CreateView, View
+from django.views.generic import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import EjercicioRealizadoFormSet
 # Create your views here.
 
 def principal(request):
@@ -19,6 +20,16 @@ class RegistrarEntreno(CreateView):
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.POST:
+            context['formset'] = EjercicioRealizadoFormSet(self.request.POST)
+        else:
+            context['formset'] = EjercicioRealizadoFormSet()
+            
+        return context
+
 class AnadirEjercicio(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/anadirEjercicio.html'
     form_class = AnadirEjercicioPersonalizado
@@ -31,3 +42,8 @@ class AnadirEjercicio(LoginRequiredMixin, CreateView):
         contexto['ejercicios'] = Ejercicio.objects.filter(visibilidad='all')
 
         return contexto
+    
+class BorrarEjercicio(DeleteView):
+    model = Ejercicio
+    template_name = 'gymApp/borrarEjercicio.html'
+    success_url = reverse_lazy('anadirEjercicio')

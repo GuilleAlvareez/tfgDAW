@@ -5,7 +5,7 @@
         <a href="{% url 'principal' %}">
             <h1>GymTracker</h1>
         </a>
-
+        
         <div>
             <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
@@ -25,28 +25,21 @@
     </header>
 {% endblock %}
 
+
 {% block contenido %}
-    <main id="main-entreno">
-        <section id="registro-entreno">
-            <form action="" method="post" id="form-entreno">
-                {% csrf_token %} 
-                <input hidden name="usuario" value="{{ user.id }}">
-                <label>Fecha del entreno</label>
-                {{ form.fecha }}
+<main id="main-borrarEjercicio">
+    <article class="card-login">
+        <div>
+            <h1>Confirmar</h1>
+            <p>¿Estas seguro que quieres borrar el ejercicio?</p>
+        </div>
+        
+        <form method="post" class="formulario-borrar">
+            {% csrf_token %}
+            <button type="submit">Si</button>
+            <a href="{% url 'anadirEjercicio' %}" id="cancelar">Cancelar</a>
+        </form>
 
-                <label>Valoracion</label>
-                {{ form.valoracion }}
-
-                <label>Ejercicio</label>
-                {% for formulario in formset %}
-                    {{ formulario.as_p }}
-                {% endfor %}
-
-                <label>Comentarios</label>
-                {{ form.comentarios }}
-
-                <button type="submit" class="">Agregar</button>
-            </form>
-        </section>
-    </main>
+    </article>
+</main>
 {% endblock %}
