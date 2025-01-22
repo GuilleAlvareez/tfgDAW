@@ -6,6 +6,12 @@ class anadirEjercicioRealizado(forms.ModelForm):
     class Meta: 
         model = Ejercicio_realizado
         fields = '__all__'
+        widgets = {
+            'observaciones': forms.Textarea(attrs={
+                'placeholder': 'Añade tus observaciones del ejercicio',
+                'style': 'resize:none;'
+            }),
+        }
 
 EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado)
 

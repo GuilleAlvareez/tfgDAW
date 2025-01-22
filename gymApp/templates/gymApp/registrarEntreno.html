@@ -1,52 +1,121 @@
 {% extends 'gymApp/base.html' %}
 
 {% block header %}
-    <header class="header-noprincipal">
-        <a href="{% url 'principal' %}">
-            <h1>GymTracker</h1>
-        </a>
+<header class="header-noprincipal">
+    <a href="{% url 'principal' %}">
+        <h1>GymTracker</h1>
+    </a>
 
-        <div>
-            <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
-            <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
-            <a>Perfil</a>
-            
-            {% if user.is_authenticated %}
-                <p>¡Bienvenido, {{ user.username }}!</p>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %} 
-                    <button type="submit" class="">Cerrar Sesión</button>
-                </form>
-            {% else %}
-                <a href="{% url 'login' %}">Iniciar sesión</a>
-            {% endif %}
-        </div>
+    <div>
+        <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
+        <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
+        <a>Perfil</a>
 
-    </header>
+        {% if user.is_authenticated %}
+        <p>¡Bienvenido, {{ user.username }}!</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="">Cerrar Sesión</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+    </div>
+
+</header>
 {% endblock %}
 
 {% block contenido %}
-    <main id="main-entreno">
-        <section id="registro-entreno">
-            <form action="" method="post" id="form-entreno">
-                {% csrf_token %} 
-                <input hidden name="usuario" value="{{ user.id }}">
-                <label>Fecha del entreno</label>
-                {{ form.fecha }}
+<main id="main-entreno">
+    <section id="registro-entreno">
+        <form action="" method="post" id="form-entreno">
+            {% csrf_token %}
+            <input hidden name="usuario" value="{{ user.id }}">
+            <label>Fecha del entreno</label>
+            {{ form.fecha }}
 
-                <label>Valoracion</label>
-                {{ form.valoracion }}
+            <label>Valoracion</label>
+            {{ form.valoracion }}
 
-                <label>Ejercicio</label>
-                {% for formulario in formset %}
-                    {{ formulario.as_p }}
-                {% endfor %}
+            <label>Ejercicios</label>
+            {% for formulario in formset %}
+            <article class="card-ejercicios-realizado">
+                <form action="" method="post" id="anadirEjercicioRealizado">
+                    <p>Ejercicio 1</p>
 
-                <label>Comentarios</label>
+                    <div class="form-row">
+                        <div>
+                            <label>Nombre</label>
+                            {{ formulario.nombre }}
+                        </div>
+
+                        <div>
+                            <label>Peso</label>
+                            {{ formulario.peso }}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label>Series</label>
+                            {{ formulario.series }}
+                        </div>
+                        <div>
+                            <label>Repeticiones</label>
+                            {{ formulario.repeticiones }}
+                        </div>
+                    </div>
+
+                    <label>Observaciones</label>
+                    {{ formulario.observaciones }}
+
+                </form>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-plus">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
+                        <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
+                        <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
+                        <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
+                        <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
+                        <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
+                        <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
+                        <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
+                        <path d="M9 12h6" />
+                        <path d="M12 9v6" />
+                    </svg>
+
+                    Añadir otro ejercicio
+                </button>
+            </article>
+            {% endfor %}
+
+            <div id="div-comentarios">
+                <label id="label-comentario">Comentarios del entreno</label>
                 {{ form.comentarios }}
+            </div>
 
-                <button type="submit" class="">Agregar</button>
-            </form>
-        </section>
-    </main>
+            <button type="submit" class="boton-agregar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-plus">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
+                        <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
+                        <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
+                        <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
+                        <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
+                        <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
+                        <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
+                        <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
+                        <path d="M9 12h6" />
+                        <path d="M12 9v6" />
+                    </svg>
+                    Agregar entreno 
+                </button>
+        </form>
+    </section>
+</main>
 {% endblock %}
