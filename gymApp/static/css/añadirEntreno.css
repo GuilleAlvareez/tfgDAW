@@ -133,6 +133,19 @@
     gap: .5rem;
 }
 
+.form-row div select {
+    width: 100%;
+    padding: .538rem;
+    color: white;
+    background-color: transparent;
+    border: var(--bordes) 1px solid;
+    border-radius: 7px;
+}
+
+.form-row div option {
+    color: black;
+}
+
 .form-row div input {
     display: flex;
     flex-direction: column;
