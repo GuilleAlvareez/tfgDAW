@@ -9,11 +9,12 @@ class anadirEjercicioRealizado(forms.ModelForm):
         widgets = {
             'observaciones': forms.Textarea(attrs={
                 'placeholder': 'Añade tus observaciones del ejercicio',
-                'style': 'resize:none;'
+                'style': 'resize:none;',
+                'class': 'textarea',
             }),
         }
 
-EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado)
+EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado, max_num=10, extra=1)
 
 
 class RegistrarEntrenamiento(forms.ModelForm):
