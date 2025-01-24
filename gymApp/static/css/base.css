@@ -38,6 +38,7 @@ body::-webkit-scrollbar-thumb {
 #header-principal div {
     display: flex;
     gap: 1rem;
+    position: relative;
 }
 
 #header-principal div a {
@@ -132,4 +133,42 @@ body::-webkit-scrollbar-thumb {
 
 footer {
     background: #fff;
+}
+
+
+.open_submenu {
+    position: relative;
+}
+
+.submenu {
+    position: absolute;
+    top: 100%; /* Justo debajo del enlace */
+    background: white;
+    color: white;
+    box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-height: 0;
+    transition: max-height 0.2s ease;
+    overflow: hidden;
+}
+
+.submenu.show {
+    max-height: 300px;
+}
+
+.submenu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+}
+
+.submenu ul li {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.submenu ul li a {
+    width: 100%;
 }
