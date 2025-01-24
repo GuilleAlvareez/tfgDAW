@@ -20,7 +20,7 @@ EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado, max_num=10
 class RegistrarEntrenamiento(forms.ModelForm):
     class Meta:
         model = Entreno
-        fields = ['fecha', 'valoracion', 'comentarios']
+        fields = ['fecha', 'valoracion', 'numero_ejercicios', 'comentarios']
         widgets = {
             'fecha': forms.DateInput(attrs={
                 'type': 'date'

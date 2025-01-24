@@ -30,7 +30,8 @@
     <section id="registro-entreno">
         <form action="" method="post" id="form-entreno">
             {% csrf_token %}
-            <input hidden name="usuario" value="{{ user.id }}">
+            <input type="hidden" name="usuario" value="{{ user.id }}"/>
+
             <label>Fecha del entreno</label>
             {{ form.fecha }}
 
@@ -38,59 +39,7 @@
             {{ form.valoracion }}
 
             <label>Ejercicios</label>
-            {% for formulario in formset %}
-            <article class="card-ejercicios-realizado">
-                <form action="" method="post" id="anadirEjercicioRealizado">
-                    <p>Ejercicio 1</p>
-
-                    <div class="form-row">
-                        <div>
-                            <label>Nombre</label>
-                            {{ formulario.nombre }}
-                        </div>
-
-                        <div>
-                            <label>Peso</label>
-                            {{ formulario.peso }}
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div>
-                            <label>Series</label>
-                            {{ formulario.series }}
-                        </div>
-                        <div>
-                            <label>Repeticiones</label>
-                            {{ formulario.repeticiones }}
-                        </div>
-                    </div>
-
-                    <label>Observaciones</label>
-                    {{ formulario.observaciones }}
-
-                </form>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-plus">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
-                        <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
-                        <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
-                        <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
-                        <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
-                        <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
-                        <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
-                        <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
-                        <path d="M9 12h6" />
-                        <path d="M12 9v6" />
-                    </svg>
-
-                    Añadir otro ejercicio
-                </button>
-            </article>
-            {% endfor %}
+            {{ form.numero_ejercicios }}
 
             <div id="div-comentarios">
                 <label id="label-comentario">Comentarios del entreno</label>
@@ -116,6 +65,16 @@
                     Agregar entreno 
                 </button>
         </form>
+    </section>
+
+    <section id="seccion-entrenos">
+        <h1>Entrenos realizados</h1>
+
+        <article class="card-entreno">
+            {% for entreno in entrenos %}
+                <li>{{ entreno.fecha }}</li>
+            {% endfor %}
+        </article>
     </section>
 </main>
 {% endblock %}

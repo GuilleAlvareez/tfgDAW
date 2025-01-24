@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .models import Ejercicio
+from .models import Ejercicio, Entreno
 from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado
 from django.views.generic import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,16 +19,20 @@ class RegistroUsuario(CreateView):
 class RegistrarEntreno(CreateView):
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
+    success_url = reverse_lazy('registrarEntreno')
 
+    def form_valid(self, form):
+        # Asignamos el usuario logueado al campo 'usuario'
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+    
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        contexto = super().get_context_data(**kwargs)
 
-        if self.request.POST:
-            context['formset'] = EjercicioRealizadoFormSet(self.request.POST)
-        else:
-            context['formset'] = EjercicioRealizadoFormSet()
-            
-        return context
+        contexto['entrenos'] = Entreno.objects.all()
+
+        return contexto
+
 
 class AnadirEjercicio(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/anadirEjercicio.html'
