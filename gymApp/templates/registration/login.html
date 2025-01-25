@@ -6,19 +6,28 @@
             <h1>GymTracker</h1>
         </a>
 
-        <div>
+        <div class="lista-enlaces">
             <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
-            <a>Perfil</a>
             
             {% if user.is_authenticated %}
-                <p>¡Bienvenido, {{ user.username }}!</p>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %} 
-                    <button type="submit" class="">Cerrar Sesión</button>
-                </form>
+                    <a class="open_submenu">Perfil</a>
+
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="#" class="enlaces-desplegable">Ver perfil</a></li>
+                            
+                            <li>
+                                <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %} 
+                                <button type="submit" class="">Cerrar sesión</button>
+                            </li>
+                            </form>
+                        </ul>
+                    </div>
             {% else %}
-                <a href="{% url 'login' %}">Iniciar sesión</a>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                    <a href="{% url 'registroUsuario' %}">Registrate</a>
             {% endif %}
         </div>
 
@@ -26,7 +35,7 @@
 {% endblock %}
 
 {% block contenido %}
-    <main class="main-noprincipal">
+    <main class="main-auth">
         <article class="card-login">
             <div>
                 <h1>Iniciar sesión</h1>

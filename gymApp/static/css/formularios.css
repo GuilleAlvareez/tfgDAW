@@ -8,6 +8,12 @@
     box-sizing: border-box;
 }
 
+.main-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-login {
     min-width: 30%;
     min-height: auto;

@@ -11,22 +11,20 @@
             <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
             
             {% if user.is_authenticated %}
-                <div class="open_submenu">
-                    <a>Perfil</a>
+                    <a class="open_submenu">Perfil</a>
 
                     <div class="submenu">
                         <ul>
-                            <li><a href="#">Ver perfil</a></li>
+                            <li><a href="#" class="enlaces-desplegable">Ver perfil</a></li>
                             
                             <li>
                                 <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %} 
-                                <button type="submit" class="">Cerrar Sesión</button>
+                                <button type="submit" class="">Cerrar sesión</button>
                             </li>
                             </form>
                         </ul>
                     </div>
-                </div>
             {% else %}
                     <a href="{% url 'login' %}">Iniciar sesión</a>
                     <a href="{% url 'registroUsuario' %}">Registrate</a>

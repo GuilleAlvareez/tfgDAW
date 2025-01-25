@@ -10,7 +10,7 @@
 }
 
 #main-entreno {
-    padding: 1rem;
+    padding: 1rem 3.2rem;
 }
 
 #registro-entreno {
@@ -179,16 +179,6 @@
     flex: 1; /* Los inputs ocuparán el espacio restante */
 }
 
-.card-ejercicios-realizado button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .7rem;
-}
-
-#seccion-entrenos h1 {
-    margin-bottom: 1rem;
-}
 
 .card-entreno {
     border: var(--bordes) 1px solid;
@@ -206,9 +196,40 @@
     color: white;
 }
 
+#seccion-entrenos h1 {
+    font-size: 2rem;
+}
 
-@media (max-width: 600px) {
-    #form-entreno input[type="date"] {
-        padding-right: 0;
-    }
+#seccion-entrenos p {
+    color: #9797a0;
+    margin-bottom: 1rem;
+}
+
+#seccion-entrenos {
+    width: 100%;
+    border: var(--bordes) 1px solid;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+#tabla-entrenos {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+#tabla-entrenos th, #tabla-entrenos td {
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: solid 1px var(--bordes);
+    padding: 1rem;
+}
+
+#tabla-entrenos th {
+    color: #9797a0;
+}
+
+#tabla-entrenos tr:hover {
+    background-color: #232323;
 }
