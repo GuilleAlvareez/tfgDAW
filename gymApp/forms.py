@@ -5,7 +5,7 @@ from .models import Entreno, Ejercicio, Ejercicio_realizado
 class anadirEjercicioRealizado(forms.ModelForm):
     class Meta: 
         model = Ejercicio_realizado
-        fields = '__all__'
+        fields = ['nombre', 'peso', 'series', 'repeticiones', 'observaciones']
         widgets = {
             'observaciones': forms.Textarea(attrs={
                 'placeholder': 'Añade tus observaciones del ejercicio',
@@ -14,7 +14,7 @@ class anadirEjercicioRealizado(forms.ModelForm):
             }),
         }
 
-EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado, max_num=10, extra=1)
+EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado)
 
 
 class RegistrarEntrenamiento(forms.ModelForm):

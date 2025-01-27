@@ -1,0 +1,91 @@
+:root {
+    --color-primario: #09090b;
+    --gris-clarito: #39393b;
+    --color-hover: #5c5b5b;
+    --color-submenu: #1c1c1e;
+    --color-texto: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.main-ejercicio-realizado {
+    padding: 1rem 3.2rem;
+}
+
+.anadir-ejercicio {
+    border: 1px solid var(--gris-clarito);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+#formulario-ejercicio-realizado {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#formulario-ejercicio-realizado input {
+    width: 100%;
+    padding: .6rem;
+    color: white;
+    background-color: transparent;
+    border: var(--gris-clarito) 1px solid;
+    border-radius: 7px;
+}
+
+#formulario-ejercicio-realizado select {
+    width: 100%;
+    padding: .6rem;
+    color: white;
+    background-color: transparent;
+    border: var(--bordes) 1px solid;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+#formulario-ejercicio-realizado select:focus {
+    outline: none;
+    border-color: #e1e1e1;
+}
+
+#formulario-ejercicio-realizado option {
+    background-color: var(--color-primario);
+    color: white;
+    padding: .5rem;
+    font-size: medium;
+}
+
+#formulario-ejercicio-realizado select::-webkit-scrollbar {
+    width: 7px;
+}
+
+#formulario-ejercicio-realizado select::-webkit-scrollbar-track {
+    background-color: var(--gris-clarito);
+}
+
+#formulario-ejercicio-realizado select::-webkit-scrollbar-thumb {
+    background-color: #69696d;
+    border-radius: 10px;
+}
+
+#formulario-ejercicio-realizado textarea {
+    padding: .5rem;
+    height: 6rem;
+    background: var(--color-primario);
+    color: white;
+    border-radius: 7px;
+}
+
+#datos-ejercicio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.campos-datos-ejercicio {
+    display: flex;
+    flex-direction: column;
+}

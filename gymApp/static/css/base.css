@@ -21,12 +21,12 @@ body {
 }
 
 body::-webkit-scrollbar {
-    background-color: var(--gris-clarito);
+    background-color: var(--color-primario);
     width: 10px;
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: var(--color-primario);
+    background-color: var(--gris-clarito);
     border-radius: 10px;
 }
 

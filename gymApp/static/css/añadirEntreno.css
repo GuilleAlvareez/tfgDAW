@@ -211,6 +211,7 @@
     border-radius: 10px;
     padding: 1.5rem;
     box-sizing: border-box;
+    margin-bottom: 1rem;
 }
 
 #tabla-entrenos {
@@ -232,4 +233,13 @@
 
 #tabla-entrenos tr:hover {
     background-color: #232323;
+}
+
+#tabla-entrenos td a {
+    color: white;
+    text-decoration: none;
+}
+
+#tabla-entrenos td a:hover {
+    text-decoration: underline;
 }

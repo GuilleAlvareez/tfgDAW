@@ -96,6 +96,7 @@
                         <td>{{ entreno.valoracion }}</td>
                         <td>{{ entreno.comentarios }}</td>
                         <td>
+                            <a href="{% url 'anadirEjercicioRealizado' entreno.id %}">Añadir Ejercicios</a>
                             <a href="#">Editar</a>
                             <a href="#">Eliminar</a>
                         </td>

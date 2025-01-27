@@ -1,0 +1,75 @@
+{% extends 'gymApp/base.html' %}
+
+{% block header %}
+    <header class="header-noprincipal">
+        <a href="{% url 'principal' %}">
+            <h1>GymTracker</h1>
+        </a>
+
+        <div class="lista-enlaces">
+            <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
+            <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
+            
+            {% if user.is_authenticated %}
+                    <a class="open_submenu">Perfil</a>
+
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="#" class="enlaces-desplegable">Ver perfil</a></li>
+                            
+                            <li>
+                                <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %} 
+                                <button type="submit" class="">Cerrar sesión</button>
+                            </li>
+                            </form>
+                        </ul>
+                    </div>
+            {% else %}
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                    <a href="{% url 'registroUsuario' %}">Registrate</a>
+            {% endif %}
+        </div>
+
+    </header>
+{% endblock %}
+
+
+{% block contenido %}
+<main class="main-ejercicio-realizado">
+    {% for formulario in formset %}
+        <article class="anadir-ejercicio">
+            <h1>Ejercicio {{ forloop.counter }}</h1>
+
+            <form action="" method="post" id="formulario-ejercicio-realizado">
+                {% csrf_token %}
+                <label>Nombre</label>
+                {{ formulario.nombre }}
+
+                <div id="datos-ejercicio">
+                    <div class="campos-datos-ejercicio">
+                        <label>Series</label>
+                        {{ formulario.series }}
+                    </div>
+                    <div class="campos-datos-ejercicio">
+                        <label>Repeticiones</label>
+                        {{ formulario.repeticiones }}
+                    </div>
+                    <div class="campos-datos-ejercicio">
+                        <label>Peso</label>
+                        {{ formulario.peso }}
+                    </div>
+                </div>
+                <label>Observaciones</label>
+                {{ formulario.observaciones }}
+
+                {% if numEjercicios == forloop.counter %}
+                    <button type="button" id="anadir-ejercicio">Añadir ejercicio</button>
+                {% endif %}
+                
+            </form>
+        </article>
+    {% endfor %}
+
+</main>
+{% endblock %}

@@ -1,9 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import formset_factory
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio, Entreno
-from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado
-from django.views.generic import CreateView, DeleteView
+from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirEjercicioRealizado
+from django.views.generic import CreateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import EjercicioRealizadoFormSet
 # Create your views here.
@@ -33,7 +34,6 @@ class RegistrarEntreno(CreateView):
 
         return contexto
 
-
 class AnadirEjercicio(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/anadirEjercicio.html'
     form_class = AnadirEjercicioPersonalizado
@@ -51,3 +51,21 @@ class BorrarEjercicio(DeleteView):
     model = Ejercicio
     template_name = 'gymApp/borrarEjercicio.html'
     success_url = reverse_lazy('anadirEjercicio')
+
+class AnadirEjercicioRealizado(TemplateView):
+    model = 'Ejercicio_realizado'
+    template_name = 'gymApp/anadirEjercicioRealizado.html'
+    success_url = reverse_lazy('registrarEntreno')
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+
+        entrenoId = self.kwargs['pk']
+        entreno = Entreno.objects.get(id=entrenoId)
+
+        EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado, extra=entreno.numero_ejercicios)
+
+        contexto['formset'] = EjercicioRealizadoFormSet
+        contexto['numEjercicios'] = entreno.numero_ejercicios
+        
+        return contexto
