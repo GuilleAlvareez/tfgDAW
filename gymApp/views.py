@@ -7,6 +7,8 @@ from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirE
 from django.views.generic import CreateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import EjercicioRealizadoFormSet
+from django.contrib import messages
+
 # Create your views here.
 
 def principal(request):
@@ -17,7 +19,7 @@ class RegistroUsuario(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('principal')
 
-class RegistrarEntreno(CreateView):
+class RegistrarEntreno(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
     success_url = reverse_lazy('registrarEntreno')
@@ -39,7 +41,11 @@ class AnadirEjercicio(LoginRequiredMixin, CreateView):
     form_class = AnadirEjercicioPersonalizado
     context_object_name = 'ejercicios'
     success_url = reverse_lazy('anadirEjercicio')
-    
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Ejercicio creado')
+        return super().form_valid(form)
+
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
 

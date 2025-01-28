@@ -1,0 +1,14 @@
+.message-success {
+    display: flex;
+    justify-content: space-between;
+    background: rgb(44, 155, 44);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.message-success #id {
+    background: #000;
+    width: 10%;
+    border: none;
+    border-radius: 10px;
+}

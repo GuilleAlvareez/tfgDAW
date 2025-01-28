@@ -58,6 +58,15 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message-success" role="alert">
+                        {{ message }}
+                        <button type="button" id="botonCerrar">x</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </form>
     </article>
 
