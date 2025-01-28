@@ -1,14 +1,35 @@
 .message-success {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    background: rgb(44, 155, 44);
+    background:  #b6efc6;
+    color: #1a754d;
+    border: 1px solid rgb(52, 122, 52);
     padding: 1rem;
+    margin-left: 2rem;
     border-radius: 10px;
+    box-shadow: 0px 0px 6px rgb(52, 122, 52);
 }
 
-.message-success #id {
-    background: #000;
-    width: 10%;
+.message-success #botonCerrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+#mensaje {
+    font-weight: bold;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
