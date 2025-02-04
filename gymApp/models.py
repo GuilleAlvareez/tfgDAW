@@ -35,7 +35,6 @@ class Entreno(models.Model):
     fecha = models.DateField()
     valoracion = models.IntegerField()
     numero_ejercicios = models.IntegerField()
-    ejercicios = models.ForeignKey(Ejercicio, on_delete=models.CASCADE, null=True, blank=True)
     comentarios = models.CharField(max_length=300, null=True)
     
     class Meta:
@@ -47,7 +46,7 @@ class Entreno(models.Model):
 
 
 class Ejercicio_realizado(models.Model):
-    entreno = models.ForeignKey(Entreno, on_delete=models.CASCADE)
+    entreno = models.ForeignKey(Entreno, on_delete=models.CASCADE, related_name='ejercicios')
     nombre = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
     peso = models.IntegerField()
     series = models.IntegerField()

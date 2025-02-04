@@ -41,7 +41,7 @@
         <article class="anadir-ejercicio">
             <h1>Ejercicio {{ forloop.counter }}</h1>
 
-            <form action="" method="post" id="formulario-ejercicio-realizado">
+            <form action="{% url 'registrarEntreno' %}" method="post" id="formulario-ejercicio-realizado">
                 {% csrf_token %}
                 <label>Nombre</label>
                 {{ formulario.nombre }}
@@ -64,7 +64,7 @@
                 {{ formulario.observaciones }}
 
                 {% if numEjercicios == forloop.counter %}
-                    <button type="button" id="anadir-ejercicio">Añadir ejercicio</button>
+                    <button type="submit" id="anadir-ejercicio">Añadir ejercicio</button>
                 {% endif %}
                 
             </form>

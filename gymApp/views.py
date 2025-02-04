@@ -2,12 +2,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import formset_factory
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .models import Ejercicio, Entreno
+from .models import Ejercicio, Ejercicio_realizado, Entreno
 from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirEjercicioRealizado
 from django.views.generic import CreateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import EjercicioRealizadoFormSet
 from django.contrib import messages
+from django.views.generic.edit import FormView
 
 # Create your views here.
 
@@ -18,23 +19,6 @@ class RegistroUsuario(CreateView):
     template_name = 'registration/registroUsuario.html'
     form_class = UserCreationForm
     success_url = reverse_lazy('principal')
-
-class RegistrarEntreno(LoginRequiredMixin, CreateView):
-    template_name = 'gymApp/registrarEntreno.html'
-    form_class = RegistrarEntrenamiento
-    success_url = reverse_lazy('registrarEntreno')
-
-    def form_valid(self, form):
-        # Asignamos el usuario logueado al campo 'usuario'
-        form.instance.usuario = self.request.user
-        return super().form_valid(form)
-    
-    def get_context_data(self, **kwargs):
-        contexto = super().get_context_data(**kwargs)
-
-        contexto['entrenos'] = Entreno.objects.all()
-
-        return contexto
 
 class AnadirEjercicio(LoginRequiredMixin, CreateView):
     template_name = 'gymApp/anadirEjercicio.html'
@@ -58,8 +42,26 @@ class BorrarEjercicio(DeleteView):
     template_name = 'gymApp/borrarEjercicio.html'
     success_url = reverse_lazy('anadirEjercicio')
 
-class AnadirEjercicioRealizado(TemplateView):
-    model = 'Ejercicio_realizado'
+class RegistrarEntreno(LoginRequiredMixin, CreateView):
+    template_name = 'gymApp/registrarEntreno.html'
+    form_class = RegistrarEntrenamiento
+    success_url = reverse_lazy('registrarEntreno')
+
+    def form_valid(self, form):
+        # Asignamos el usuario logueado al campo 'usuario'
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+
+        contexto['entrenos'] = Entreno.objects.all()
+
+        return contexto
+
+
+class AnadirEjercicioRealizado(FormView):
+    model = Ejercicio_realizado
     template_name = 'gymApp/anadirEjercicioRealizado.html'
     success_url = reverse_lazy('registrarEntreno')
 
@@ -75,3 +77,15 @@ class AnadirEjercicioRealizado(TemplateView):
         contexto['numEjercicios'] = entreno.numero_ejercicios
         
         return contexto
+    
+    # def form_valid(self, form):
+    #     entreno = Entreno.objects.get(id=self.kwargs['pk'])
+        
+    #     for f in form:
+    #         if f.cleaned_data:
+    #             ejercicio_realizado = f.save(commit=False)
+    #             ejercicio_realizado.entreno = entreno
+    #             ejercicio_realizado.save()
+    #             entreno.ejercicios.add(ejercicio_realizado)
+        
+    #     return super().form_valid(form)
