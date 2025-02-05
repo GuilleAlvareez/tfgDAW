@@ -37,39 +37,38 @@
 
 {% block contenido %}
 <main class="main-ejercicio-realizado">
-    {% for formulario in formset %}
-        <article class="anadir-ejercicio">
-            <h1>Ejercicio {{ forloop.counter }}</h1>
+    <article class="anadir-ejercicio">
+        
+        <form action="" method="POST" id="formulario-ejercicio-realizado">
+                {% for formulario in formset %}
+                    {{ formset.management_form }}
+                    <h1>Ejercicio {{ forloop.counter }}</h1>
+                    {% csrf_token %}
+                    <label>Nombre</label>
+                    {{ formulario.nombre }}
 
-            <form action="{% url 'registrarEntreno' %}" method="post" id="formulario-ejercicio-realizado">
-                {% csrf_token %}
-                <label>Nombre</label>
-                {{ formulario.nombre }}
+                    <div id="datos-ejercicio">
+                        <div class="campos-datos-ejercicio">
+                            <label>Series</label>
+                            {{ formulario.series }}
+                        </div>
+                        <div class="campos-datos-ejercicio">
+                            <label>Repeticiones</label>
+                            {{ formulario.repeticiones }}
+                        </div>
+                        <div class="campos-datos-ejercicio">
+                            <label>Peso</label>
+                            {{ formulario.peso }}
+                        </div>
+                    </div>
+                    <label>Observaciones</label>
+                    {{ formulario.observaciones }}
 
-                <div id="datos-ejercicio">
-                    <div class="campos-datos-ejercicio">
-                        <label>Series</label>
-                        {{ formulario.series }}
-                    </div>
-                    <div class="campos-datos-ejercicio">
-                        <label>Repeticiones</label>
-                        {{ formulario.repeticiones }}
-                    </div>
-                    <div class="campos-datos-ejercicio">
-                        <label>Peso</label>
-                        {{ formulario.peso }}
-                    </div>
-                </div>
-                <label>Observaciones</label>
-                {{ formulario.observaciones }}
-
-                {% if numEjercicios == forloop.counter %}
-                    <button type="submit" id="anadir-ejercicio">Añadir ejercicio</button>
-                {% endif %}
-                
+                    
+                {% endfor %}
+                <button type="submit" id="anadir-ejercicio">Añadir ejercicios</button>
             </form>
         </article>
-    {% endfor %}
 
 </main>
 {% endblock %}

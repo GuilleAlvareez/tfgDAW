@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
 from .models import Entreno, Ejercicio, Ejercicio_realizado
 
 class anadirEjercicioRealizado(forms.ModelForm):
@@ -14,7 +14,7 @@ class anadirEjercicioRealizado(forms.ModelForm):
             }),
         }
 
-EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado)
+EjercicioRealizadoFormSet = modelformset_factory(Ejercicio_realizado, anadirEjercicioRealizado)
 
 
 class RegistrarEntrenamiento(forms.ModelForm):

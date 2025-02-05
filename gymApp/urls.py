@@ -10,5 +10,6 @@ urlpatterns = [
     path('registro', RegistroUsuario.as_view(), name='registroUsuario'),
 
     path('registrarEntreno', RegistrarEntreno.as_view(), name='registrarEntreno'),
-    path('registrarEntreno/<int:pk>/anadirEjercicioRealizado', AnadirEjercicioRealizado.as_view(), name='anadirEjercicioRealizado'),
+    # path('registrarEntreno/<int:pk>/anadirEjercicioRealizado', AnadirEjercicioRealizado.as_view(), name='anadirEjercicioRealizado'),
+    path('registrarEntreno/<int:pk>/anadirEjercicioRealizado', AnadirEjercicioRealizado, name='anadirEjercicioRealizado'),
 ]
