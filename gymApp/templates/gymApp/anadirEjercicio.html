@@ -78,7 +78,7 @@
             <h1>Ejercicios</h1>
         </div>
         <ul>
-            {% for ejercicio in ejercicios %}
+            {% for ejercicio in ejerciciosMostar %}
                 <article class="card-ejercicio">
                     <li>{{ ejercicio.nombre }}
                         
@@ -96,6 +96,20 @@
                 </article>
             {% endfor %}
         </ul>
+
+        <div class="pagination">
+            {% if ejerciciosMostar.has_previous %}
+                <a href="?page=1">Primero</a>
+                <a href="?page={{ ejercicios.previous_page_number }}">Anterior</a>
+            {% endif %}
+        
+            <span>Página {{ ejerciciosMostar.number }} de {{ ejerciciosMostar.paginator.num_pages }}</span>
+        
+            {% if ejerciciosMostar.has_next %}
+                <a href="?page={{ ejercicios.next_page_number }}">Siguiente</a>
+                <a href="?page={{ ejercicios.paginator.num_pages }}">Último</a>
+            {% endif %}
+        </div>
     </section>
 </main>
 {% endblock %}

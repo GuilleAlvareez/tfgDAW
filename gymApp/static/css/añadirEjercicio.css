@@ -167,6 +167,38 @@ html {
     background: #e1e1e1;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.pagination a {
+    text-decoration: none;
+    background-color: var(--gris-clarito);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 7px;
+    transition: all 200ms linear;
+    font-weight: bold;
+}
+
+.pagination a:hover {
+    background-color: var(--azul-sombra);
+    box-shadow: 0px 4px 8px rgba(31, 137, 176, 0.6);
+    transform: translateY(-2px);
+}
+
+.pagination span {
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    border: var(--bordes) 1px solid var(--gris-clarito);
+}
+
 @media (max-width: 600px) {
     #main-añadirEjercicio {
         display: flex;

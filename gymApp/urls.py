@@ -12,4 +12,5 @@ urlpatterns = [
     path('registrarEntreno', RegistrarEntreno.as_view(), name='registrarEntreno'),
     # path('registrarEntreno/<int:pk>/anadirEjercicioRealizado', AnadirEjercicioRealizado.as_view(), name='anadirEjercicioRealizado'),
     path('registrarEntreno/<int:pk>/anadirEjercicioRealizado', AnadirEjercicioRealizado, name='anadirEjercicioRealizado'),
+    path('borrarEntreno/<int:pk>', BorrarEntreno.as_view(), name='borrarEntreno'),
 ]

@@ -98,7 +98,7 @@
                         <td>
                             <a href="{% url 'anadirEjercicioRealizado' entreno.id %}">Añadir Ejercicios</a>
                             <a href="#">Editar</a>
-                            <a href="#">Eliminar</a>
+                            <a href="{% url 'borrarEntreno' entreno.id %}">Eliminar</a>
                         </td>
                     </tr>
                 {% endfor %}

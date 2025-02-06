@@ -1,15 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import formset_factory, modelformset_factory
+from django.forms import modelformset_factory
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio, Ejercicio_realizado, Entreno
 from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirEjercicioRealizado
-from django.views.generic import CreateView, DeleteView, TemplateView
+from django.views.generic import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import EjercicioRealizadoFormSet
 from django.contrib import messages
-from django.views.generic.edit import FormView
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -34,8 +33,13 @@ class AnadirEjercicio(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
+        ejercicios = Ejercicio.objects.all()
 
-        contexto['ejercicios'] = Ejercicio.objects.filter(visibilidad='all')
+        paginator = Paginator(ejercicios, 8)
+        page = self.request.GET.get('page')
+        ejerciciosMostar = paginator.get_page(page)
+
+        contexto['ejerciciosMostar'] = ejerciciosMostar
 
         return contexto
     
@@ -50,7 +54,6 @@ class RegistrarEntreno(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('registrarEntreno')
 
     def form_valid(self, form):
-        # Asignamos el usuario logueado al campo 'usuario'
         form.instance.usuario = self.request.user
         return super().form_valid(form)
     
@@ -63,14 +66,12 @@ class RegistrarEntreno(LoginRequiredMixin, CreateView):
 
 def AnadirEjercicioRealizado(request, pk):
     entreno = get_object_or_404(Entreno, pk=pk)
+    queryset = Ejercicio_realizado.objects.filter(entreno=entreno)
 
-    EjercicioRealizadoFormSet = modelformset_factory(Ejercicio_realizado, form=anadirEjercicioRealizado, extra=entreno.numero_ejercicios, fields=['nombre', 'peso', 'series', 'repeticiones', 'observaciones'])
-
-    queryset = Ejercicio_realizado.objects.filter(entreno = entreno)
+    EjercicioRealizadoFormSet = modelformset_factory(Ejercicio_realizado, form=anadirEjercicioRealizado, extra=0, fields=['nombre', 'peso', 'series', 'repeticiones', 'observaciones'])
 
     if request.method == 'POST':
         formset = EjercicioRealizadoFormSet(request.POST, queryset=queryset)
-
         if formset.is_valid():
             ejercicios = formset.save(commit=False)
             for ejercicio in ejercicios:
@@ -79,10 +80,16 @@ def AnadirEjercicioRealizado(request, pk):
             return redirect('registrarEntreno')
     else:
         formset = EjercicioRealizadoFormSet(queryset=queryset)
-    return render(request, 'gymApp/anadirEjercicioRealizado.html', { 'formset': formset, 'numEjercicios': entreno.numero_ejercicios })
 
+        if not queryset.exists():
+            formset = EjercicioRealizadoFormSet(queryset=queryset, initial=[{}] * entreno.numero_ejercicios)
 
+    return render(request, 'gymApp/anadirEjercicioRealizado.html', {'formset': formset, 'numEjercicios': entreno.numero_ejercicios})
 
+class BorrarEntreno(DeleteView):
+    model = Entreno
+    template_name = 'gymApp/borrarEntreno.html'
+    success_url = reverse_lazy('registrarEntreno')
 
 # class AnadirEjercicioRealizado(FormView):
 #     model = Ejercicio_realizado
