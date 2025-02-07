@@ -104,7 +104,6 @@ html {
 
 .ejercicios {
     width: 100%;
-    margin-right: 2rem;
 }
 
 .ejercicios div{
@@ -197,6 +196,50 @@ html {
     padding: 0.5rem 1rem;
     border-radius: 7px;
     border: var(--bordes) 1px solid var(--gris-clarito);
+}
+
+#filtros {
+    max-width: 100%;
+    margin-left: 2.55rem;
+    margin-bottom: 1rem;
+}
+
+#filtros form {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+#filtros select {
+    width: 100%;
+    padding: .6rem;
+    color: white;
+    background-color: transparent;
+    border: var(--bordes) 1px solid;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+#filtros select:focus {
+    outline: none;
+    border-color: #e1e1e1;
+}
+
+#filtros option {
+    background-color: var(--color-primario);
+    color: white;
+    padding: .5rem;
+    font-size: medium;
+}
+
+#filtros button {
+    border: none;
+    background: white;
+    padding: 0 .7rem;
+    border-radius: 10px;
+    font-weight: bold;
+
 }
 
 @media (max-width: 600px) {

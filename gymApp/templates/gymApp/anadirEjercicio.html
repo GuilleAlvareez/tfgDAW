@@ -47,8 +47,8 @@
             {{form.nombre}}
             <label for="musculos">Musculos trabajados</label>
             {{form.musculos}}
-            <label for="visibilidad">Visibilidad</label>
-            {{form.visibilidad}}
+            <!-- <label for="visibilidad">Visibilidad</label>
+            {{form.visibilidad}} -->
             <button type="submit" class="">Agregar</button>
             
             {% if form.errors %}
@@ -77,6 +77,22 @@
         <div>
             <h1>Ejercicios</h1>
         </div>
+
+        <section id="filtros">
+            <form action="" method="get">
+                <select name="filtroMusculo">
+                    <option value="">Selecciona una opcion</option>
+
+                    {% for musculo in musculos %}
+                        <option value="{{ musculo.nombre }}">{{ musculo }}</option>
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </section>
+
         <ul>
             {% for ejercicio in ejerciciosMostar %}
                 <article class="card-ejercicio">

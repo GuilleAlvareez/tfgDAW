@@ -39,4 +39,4 @@ class RegistrarEntrenamiento(forms.ModelForm):
 class AnadirEjercicioPersonalizado(forms.ModelForm):
     class Meta:
         model = Ejercicio
-        fields = '__all__'
+        fields = ['nombre', 'musculos']

@@ -2,14 +2,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import modelformset_factory
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .models import Ejercicio, Ejercicio_realizado, Entreno
+from .models import Ejercicio, Ejercicio_realizado, Entreno, Musculo
 from .forms import RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirEjercicioRealizado
 from django.views.generic import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -22,26 +22,43 @@ class RegistroUsuario(CreateView):
     success_url = reverse_lazy('principal')
 
 class AnadirEjercicio(LoginRequiredMixin, CreateView):
+    model = Ejercicio
     template_name = 'gymApp/anadirEjercicio.html'
     form_class = AnadirEjercicioPersonalizado
     context_object_name = 'ejercicios'
     success_url = reverse_lazy('anadirEjercicio')
 
     def form_valid(self, form):
+        ejercicio = form.save(commit=False)
+
+        ejercicio.visibilidad = self.request.user.username
+        ejercicio.save()
         messages.success(self.request, 'Ejercicio creado')
+        
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
+        usuario = self.request.user
+        musculos = Musculo.objects.all()
         ejercicios = Ejercicio.objects.all()
-
+        
         paginator = Paginator(ejercicios, 8)
         page = self.request.GET.get('page')
         ejerciciosMostar = paginator.get_page(page)
 
-        contexto['ejerciciosMostar'] = ejerciciosMostar
+        musculoAFiltrar = self.request.GET.get('filtroMusculo')
+
+        if musculoAFiltrar:
+            ejerciciosFiltrado = Ejercicio.objects.filter(Q(musculos__nombre = musculoAFiltrar) & Q(Q(visibilidad = usuario.username) | Q(visibilidad = 'all')))
+            contexto['ejerciciosMostar'] = ejerciciosFiltrado
+        else:
+            contexto['ejerciciosMostar'] = Ejercicio.objects.filter(Q(visibilidad = 'all') | Q(visibilidad = usuario.username))
+
+        contexto['musculos'] = musculos
 
         return contexto
+    
     
 class BorrarEjercicio(DeleteView):
     model = Ejercicio
@@ -49,6 +66,7 @@ class BorrarEjercicio(DeleteView):
     success_url = reverse_lazy('anadirEjercicio')
 
 class RegistrarEntreno(LoginRequiredMixin, CreateView):
+    model = Entreno
     template_name = 'gymApp/registrarEntreno.html'
     form_class = RegistrarEntrenamiento
     success_url = reverse_lazy('registrarEntreno')
