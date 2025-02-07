@@ -100,14 +100,14 @@
         <div class="pagination">
             {% if ejerciciosMostar.has_previous %}
                 <a href="?page=1">Primero</a>
-                <a href="?page={{ ejercicios.previous_page_number }}">Anterior</a>
+                <a href="?page={{ ejerciciosMostar.previous_page_number }}">Anterior</a>
             {% endif %}
         
             <span>Página {{ ejerciciosMostar.number }} de {{ ejerciciosMostar.paginator.num_pages }}</span>
         
             {% if ejerciciosMostar.has_next %}
-                <a href="?page={{ ejercicios.next_page_number }}">Siguiente</a>
-                <a href="?page={{ ejercicios.paginator.num_pages }}">Último</a>
+                <a href="?page={{ ejerciciosMostar.next_page_number }}">Siguiente</a>
+                <a href="?page={{ ejerciciosMostar.paginator.num_pages }}">Último</a>
             {% endif %}
         </div>
     </section>
