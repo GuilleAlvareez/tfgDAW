@@ -1,0 +1,80 @@
+{% extends 'gymApp/base.html' %}
+
+{% block header %}
+<header class="header-noprincipal">
+    <a href="{% url 'principal' %}">
+        <h1>GymTracker</h1>
+    </a>
+
+    <div class="lista-enlaces">
+        <a href="{% url 'anadirEjercicio' %}">Ejercicios</a>
+        <a href="{% url 'registrarEntreno' %}">Registrar entreno</a>
+
+        {% if user.is_authenticated %}
+        <a class="open_submenu">Perfil</a>
+
+        <div class="submenu">
+            <ul>
+                <li><a href="#" class="enlaces-desplegable">Ver perfil</a></li>
+
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="">Cerrar sesión</button>
+                </li>
+                </form>
+            </ul>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+        <a href="{% url 'registroUsuario' %}">Registrate</a>
+        {% endif %}
+    </div>
+
+</header>
+{% endblock %}
+
+{% block contenido %}
+<main id="main-entreno">
+    <form action="" method="post" id="form-entreno">
+        {% csrf_token %}
+        <input type="hidden" name="usuario" value="{{ user.id }}" />
+
+        <label>Nombre del entreno</label>
+        {{ form.nombre }}
+
+        <label>Fecha del entreno</label>
+        {{ form.fecha }}
+
+        <label>Valoracion</label>
+        {{ form.valoracion }}
+
+        <label>Ejercicios</label>
+        {{ form.numero_ejercicios }}
+
+        <div id="div-comentarios">
+            <label id="label-comentario">Comentarios del entreno</label>
+            {{ form.comentarios }}
+        </div>
+
+        <button type="submit" class="boton-agregar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-plus">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
+                <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
+                <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
+                <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
+                <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
+                <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
+                <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
+                <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
+                <path d="M9 12h6" />
+                <path d="M12 9v6" />
+            </svg>
+            Agregar entreno
+        </button>
+    </form>
+</main>
+{% endblock %}

@@ -41,6 +41,9 @@
             {% csrf_token %}
             <input type="hidden" name="usuario" value="{{ user.id }}"/>
 
+            <label>Nombre del entreno</label>
+            {{ form.nombre }}
+
             <label>Fecha del entreno</label>
             {{ form.fecha }}
 
@@ -80,9 +83,10 @@
         <h1>Entrenos realizados</h1>
         <p>Historial de entrenamientos realizados</p>
 
-        <table id="tabla-entrenos">
+        <table class="tabla">
             <thead>
                 <tr>
+                    <th>Nombre</th>
                     <th>Fecha</th>
                     <th>Valoracion</th>
                     <th>Comentarios</th>
@@ -92,13 +96,15 @@
             <tbody>
                 {% for entreno in entrenos %}
                     <tr>
+                        <td>{{ entreno.nombre }}</td>
                         <td>{{ entreno.fecha }}</td>
                         <td>{{ entreno.valoracion }}</td>
                         <td>{{ entreno.comentarios }}</td>
                         <td>
                             <a href="{% url 'anadirEjercicioRealizado' entreno.id %}">Añadir Ejercicios</a>
-                            <a href="#">Editar</a>
-                            <a href="{% url 'borrarEntreno' entreno.id %}">Eliminar</a>
+                            <a href="{% url 'listaEjerciciosDeUnEntreno' entreno.id %}">Ver Ejercicios</a>
+                            <a href="{% url 'editarEntreno' entreno.id %}">Editar Entreno</a>
+                            <a href="{% url 'borrarEntreno' entreno.id %}">Eliminar Entreno</a>
                         </td>
                     </tr>
                 {% endfor %}

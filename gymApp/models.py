@@ -32,6 +32,7 @@ class Ejercicio(models.Model):
 
 class Entreno(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
     fecha = models.DateField()
     valoracion = models.IntegerField()
     numero_ejercicios = models.IntegerField()

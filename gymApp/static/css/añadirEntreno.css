@@ -214,32 +214,33 @@
     margin-bottom: 1rem;
 }
 
-#tabla-entrenos {
+.tabla {
     width: 100%;
     border-collapse: collapse;
     box-sizing: border-box;
 }
 
-#tabla-entrenos th, #tabla-entrenos td {
+.tabla th, .tabla td {
     text-align: left;
     vertical-align: middle;
     border-bottom: solid 1px var(--bordes);
     padding: 1rem;
 }
 
-#tabla-entrenos th {
+.tabla th {
     color: #9797a0;
 }
 
-#tabla-entrenos tr:hover {
+.tabla tr:hover {
     background-color: #232323;
 }
 
-#tabla-entrenos td a {
+.tabla td a {
     color: white;
+    margin-right: 1rem;
     text-decoration: none;
 }
 
-#tabla-entrenos td a:hover {
+.tabla td a:hover {
     text-decoration: underline;
 }
