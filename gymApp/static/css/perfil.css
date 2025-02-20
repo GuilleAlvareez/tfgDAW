@@ -1,0 +1,48 @@
+.main-perfil {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.info-usuario {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-perfil {
+    display: flex;
+    flex-direction: column;
+    border: var(--bordes) 1px solid;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-radius: 10px;
+    max-height: fit-content;
+}
+
+.card-perfil p{
+    color: #9797a0;
+}
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: var(--bordes) 1px solid;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.titulo-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .9rem;
+}

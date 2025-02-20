@@ -15,7 +15,7 @@
 
         <div class="submenu">
             <ul>
-                <li><a href="#" class="enlaces-desplegable">Ver perfil</a></li>
+                <li><a href="{% url 'perfilUsuario' pk=request.user.pk %}" class="enlaces-desplegable">Ver perfil</a></li>
 
                 <li>
                     <form action="{% url 'logout' %}" method="post">

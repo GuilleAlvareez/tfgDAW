@@ -4,12 +4,13 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Ejercicio, Ejercicio_realizado, Entreno, Musculo
 from .forms import EjercicioRealizadoFormSet, RegistrarEntrenamiento, AnadirEjercicioPersonalizado, anadirEjercicioRealizado
-from django.views.generic import CreateView, DeleteView, UpdateView, ListView
+from django.views.generic import CreateView, DeleteView, UpdateView, ListView, DetailView
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Sum, F
 
 # Create your views here.
 
@@ -82,10 +83,8 @@ class RegistrarEntreno(LoginRequiredMixin, CreateView):
     
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
-        ejerciciosRealizados = Ejercicio_realizado.objects.all()
 
-        contexto['entrenos'] = Entreno.objects.all()
-        contexto['ejerciciosRealizados'] = ejerciciosRealizados
+        contexto['entrenos'] = Entreno.objects.filter(usuario=self.request.user)
 
         return contexto
 
@@ -150,3 +149,21 @@ class BorrarEntreno(DeleteView):
     model = Entreno
     template_name = 'gymApp/borrarEntreno.html'
     success_url = reverse_lazy('registrarEntreno')
+
+class PerfilUsuario(DetailView):
+    model = User
+    template_name = 'gymApp/perfilUsuario.html'
+    context_object_name = 'usuario'
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        usuario = self.request.user
+
+        contexto['totalEntrenos'] = Entreno.objects.filter(usuario=usuario).count()
+        contexto['totalEjercicios'] = Ejercicio_realizado.objects.filter(entreno__usuario=usuario).count()
+
+        #Esto devuelve un diccionario que tiene una clave que es 'total' y el valor es la suma total de los pesos levantados por el usuario
+        total_peso = Ejercicio_realizado.objects.filter(entreno__usuario=usuario).aggregate(total=Sum(F('peso') * F('series') * F('repeticiones')))
+
+        contexto['totalPesoLevantado'] = total_peso['total']
+        return contexto
