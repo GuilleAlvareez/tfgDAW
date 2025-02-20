@@ -47,9 +47,11 @@
             {{form.nombre}}
             <label for="musculos">Musculos trabajados</label>
             {{form.musculos}}
-            <!-- <label for="visibilidad">Visibilidad</label>
-            {{form.visibilidad}} -->
-            <button type="submit" class="">Agregar</button>
+
+            <button type="submit" class="boton-agregar">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-hexagon-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" /><path d="M9 12h6" /><path d="M12 9v6" /></svg>
+                Agregar
+            </button>
             
             {% if form.errors %}
                 <div class="error">
@@ -98,6 +100,7 @@
                 <article class="card-ejercicio">
                     <li>{{ ejercicio.nombre }}
                         
+                        {% if user.is_superuser or ejercicio.visibilidad == request.user.username %}
                             <a href="{% url 'borrarEjercicio' pk=ejercicio.pk %}" id="boton-svg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -108,6 +111,7 @@
                                     <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                 </svg>
                             </a>
+                        {% endif %}
                     </li>
                 </article>
             {% endfor %}

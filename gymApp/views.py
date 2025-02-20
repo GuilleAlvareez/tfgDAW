@@ -39,15 +39,9 @@ class AnadirEjercicio(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
-        usuario = self.request.user
         musculos = Musculo.objects.all()
         
-        musculoAFiltrar = self.request.GET.get('filtroMusculo')
-
-        if musculoAFiltrar:
-            ejercicios = Ejercicio.objects.filter(Q(musculos__nombre=musculoAFiltrar) & Q(Q(visibilidad=usuario.username) | Q(visibilidad='all')))
-        else:
-            ejercicios = Ejercicio.objects.filter(Q(visibilidad='all') | Q(visibilidad=usuario.username))
+        ejercicios = self.get_queryset()
 
         paginator = Paginator(ejercicios, 5)
         page = self.request.GET.get('page')
@@ -58,6 +52,17 @@ class AnadirEjercicio(LoginRequiredMixin, CreateView):
 
         return contexto
 
+    def get_queryset(self):
+        query = super().get_queryset()
+        usuario = self.request.user
+        musculoAFiltrar = self.request.GET.get('filtroMusculo')
+
+        if musculoAFiltrar:
+            query = query.filter(Q(musculos__nombre=musculoAFiltrar) & Q(Q(visibilidad=usuario.username) | Q(visibilidad='all')))
+        else:
+            query = query.filter(Q(visibilidad='all') | Q(visibilidad=usuario.username))
+
+        return query
     
     
 class BorrarEjercicio(DeleteView):
@@ -89,7 +94,6 @@ class EditarEntreno(LoginRequiredMixin, UpdateView):
     template_name = 'gymApp/editarEntreno.html'
     form_class = RegistrarEntrenamiento
     success_url = reverse_lazy('registrarEntreno')
-
 
 class AnadirEjercicioRealizado(CreateView):
     model = Ejercicio_realizado
@@ -142,59 +146,7 @@ class ListaEjerciciosDeUnEntreno(ListView):
         
         return contexto
 
-# def AnadirEjercicioRealizado(request, pk):
-#     entreno = get_object_or_404(Entreno, pk=pk)
-#     queryset = Ejercicio_realizado.objects.filter(entreno=entreno)
-
-#     EjercicioRealizadoFormSet = modelformset_factory(Ejercicio_realizado, form=anadirEjercicioRealizado, extra=0, fields=['nombre', 'peso', 'series', 'repeticiones', 'observaciones'])
-
-#     if request.method == 'POST':
-#         formset = EjercicioRealizadoFormSet(request.POST, queryset=queryset)
-#         if formset.is_valid():
-#             ejercicios = formset.save(commit=False)
-#             for ejercicio in ejercicios:
-#                 ejercicio.entreno = entreno
-#                 ejercicio.save()
-#             return redirect('registrarEntreno')
-#     else:
-#         formset = EjercicioRealizadoFormSet(queryset=queryset)
-
-#         if not queryset.exists():
-#             formset = EjercicioRealizadoFormSet(queryset=queryset, initial=[{}] * entreno.numero_ejercicios)
-
-#     return render(request, 'gymApp/anadirEjercicioRealizado.html', {'formset': formset, 'numEjercicios': entreno.numero_ejercicios})
-
 class BorrarEntreno(DeleteView):
     model = Entreno
     template_name = 'gymApp/borrarEntreno.html'
     success_url = reverse_lazy('registrarEntreno')
-
-# class AnadirEjercicioRealizado(FormView):
-#     model = Ejercicio_realizado
-#     template_name = 'gymApp/anadirEjercicioRealizado.html'
-#     success_url = reverse_lazy('registrarEntreno')
-
-#     def get_context_data(self, **kwargs):
-#         contexto = super().get_context_data(**kwargs)
-
-#         entrenoId = self.kwargs['pk']
-#         entreno = Entreno.objects.get(id=entrenoId)
-
-#         EjercicioRealizadoFormSet = formset_factory(anadirEjercicioRealizado, extra=entreno.numero_ejercicios)
-
-#         contexto['formset'] = EjercicioRealizadoFormSet
-#         contexto['numEjercicios'] = entreno.numero_ejercicios
-        
-#         return contexto
-    
-#     # def form_valid(self, form):
-#     #     entreno = Entreno.objects.get(id=self.kwargs['pk'])
-        
-#     #     for f in form:
-#     #         if f.cleaned_data:
-#     #             ejercicio_realizado = f.save(commit=False)
-#     #             ejercicio_realizado.entreno = entreno
-#     #             ejercicio_realizado.save()
-#     #             entreno.ejercicios.add(ejercicio_realizado)
-        
-#     #     return super().form_valid(form)

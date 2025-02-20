@@ -52,7 +52,7 @@ class Ejercicio_realizado(models.Model):
     peso = models.IntegerField()
     series = models.IntegerField()
     repeticiones = models.IntegerField()
-    observaciones = models.CharField(max_length=200)
+    observaciones = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ejercicio_realizado'

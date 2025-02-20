@@ -172,11 +172,11 @@
 }
 
 .form-row label {
-    width: 100px; /* Puedes ajustar el ancho según sea necesario */
+    width: 100px;
 }
 
 .form-row input {
-    flex: 1; /* Los inputs ocuparán el espacio restante */
+    flex: 1;
 }
 
 

@@ -58,7 +58,12 @@
                         <td>{{ ejercicio.series }}</td>
                         <td>{{ ejercicio.repeticiones }}</td>
                         <td>{{ ejercicio.peso }}</td>
-                        <td>{{ ejercicio.observaciones }}</td>
+
+                        {% if ejercicio.observaciones != None %}
+                            <td>{{ ejercicio.observaciones }}</td>
+                        {% else %}
+                            <td>No hay observaciones</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
